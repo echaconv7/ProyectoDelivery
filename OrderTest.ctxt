@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=OrderTest
+comment0.text=\r\n\ The\ test\ class\ OrderTest.\r\n\r\n\ @author\ \ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling\r\n\ @version\ 2016.02.29\r\n\ @version\ 2024.10.07\ DP\ classes\ \r\n
+comment1.params=
+comment1.target=OrderTest()
+comment1.text=\r\n\ Default\ constructor\ for\ test\ class\ OrderTest\r\n
+comment2.params=
+comment2.target=void\ setUp()
+comment2.text=\r\n\ Sets\ up\ the\ test\ fixture.\r\n\r\n\ Called\ before\ every\ test\ case\ method.\r\n
+comment3.params=
+comment3.target=void\ tearDown()
+comment3.text=\r\n\ Tears\ down\ the\ test\ fixture.\r\n\r\n\ Called\ after\ every\ test\ case\ method.\r\n
+comment4.params=
+comment4.target=void\ testCreation()
+comment4.text=\r\n\ Test\ basic\ creation\ of\ an\ order.\r\n\ Ensure\ that\ the\ location\ and\ destination\ locations\r\n\ have\ been\ set.\r\n
+comment5.params=
+comment5.target=void\ testGetDeliveryPersonName()
+comment5.text=\r\n\ Test\ of\ the\ getDeliveryPersonName\ method.\r\n\ Ensure\ that\ this\ method\ gets\ and\ returns\ the\ name\ of\ the\ delivery\ person\ correctly.\r\n
+comment6.params=
+comment6.target=void\ testGetDestination()
+comment6.text=\r\n\ Test\ of\ the\ getDestination\ method.\r\n\ Ensure\ that\ this\ method\ gets\ and\ returns\ the\ destination\ location\ correctly.\r\n
+numComments=7

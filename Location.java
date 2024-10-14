@@ -7,8 +7,8 @@
  */
 public class Location
 {
-    public int x;  //TODO cambiar a private
-    public int y;  //TODO cambiar a private
+    private int x;
+    private int y;
 
     /**
      * Model a location in the city.
@@ -55,12 +55,22 @@ public class Location
      */
     public Location nextLocation(Location destination)
     {
-        //TODO ahora mismo este método devuelve directamente el destino final
-        //PERO DEBERIA ir calculando y devolviendo la siguiente posición por la que 
-        // va pasando la persona que reparte hasta llegar al destino
-        return destination;
+        int distanceInX = destination.getX()-getX();
+        int distanceInY = destination.getY()-getY();
+        int oneStepX=0;
+        int oneStepY=0;
+        
+        if(distanceInX!=0){
+            oneStepX = distanceInX/Math.abs(distanceInX);
+        }
+        
+        if(distanceInY!=0){
+            oneStepY = distanceInY/Math.abs(distanceInY);
+        }
+        Location location=new Location(this.getX()+oneStepX,this.getY()+oneStepY);
+        return location;
     }
-
+ 
     /**
      * Determine the number of movements required to get
      * from here to the destination.
@@ -69,8 +79,13 @@ public class Location
      */
     public int distance(Location destination)
     {
-        //TODO implementar este método que devuelve el número total de pasos para alcanzar el destino
-        return 1;
+        int distance=0;
+        Location iterationLocation = this;
+        while(!destination.equals(iterationLocation)){
+            iterationLocation = iterationLocation.nextLocation(destination);
+            distance++;
+        }
+        return distance;
     }
 
     /**

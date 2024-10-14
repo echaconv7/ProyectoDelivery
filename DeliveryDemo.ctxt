@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=DeliveryDemo
+comment0.text=\r\n\ Provide\ a\ simple\ demonstration\ of\ running\ a\ stage-one\r\n\ scenario.\ Three\ simulaions\ are\ create\:\ \r\n\r\n\ DemoOneOrder\:\ A\ single\ order\ and\ delivery\ person\ are\ created,\ and\ a\ pickup\r\n\ requested.\ As\ the\ simulation\ is\ run,\ the\ order\r\n\ should\ be\ picked\ up\ and\ then\ delivered\ to\ their\ destination.\r\n\ \r\n\ DemoInicial\:\ Two\ orders\ and\ three\ delivery\ persons\ are\ created,\ two\ pickups\r\n\ requested.\ As\ the\ simulation\ is\ run,\ the\ orders\r\n\ should\ be\ picked\ up\ and\ then\ delivered\ to\ their\ destination.\r\n\r\n\ DemoAvanzada\:\ Some\ orders\ and\ delivery\ persons\ are\ created,\ so\ some\ pickup\r\n\ are\ requested.\ As\ the\ simulation\ is\ run,\ all\ the\ orders\r\n\ should\ be\ picked\ up\ and\ then\ delivered\ to\ to\ their\ destination.\r\n\ \r\n\ @author\ DP\ Clasess\r\n\ @version\ 2024\r\n
+comment1.params=
+comment1.target=void\ main()
+numComments=2

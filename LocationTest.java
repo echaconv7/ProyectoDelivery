@@ -12,10 +12,17 @@ import org.junit.Test;
  */
 public class LocationTest
 {
-    Location startLocation;
-    Location destination;
-    //TODO
-    //crear más campos (si es necesario) 
+    private Location startLocation;
+    private Location destination;
+    
+    private Location startLocationExample1;
+    private Location destinationExample1;
+    
+    private Location startLocationExample2;
+    private Location destinationExample2;
+    
+    private Location startLocationExample3;
+    private Location destinationExample3;
 
     /**
      * Default constructor for test class LocationTest
@@ -34,9 +41,15 @@ public class LocationTest
     {
         startLocation = new Location(1, 2);
         destination = new Location(2, 2);
-
-        //TODO
-        //Completar (si es necesario) este método
+        
+        startLocationExample1 = new Location(0,0);
+        destinationExample1 = new Location(1,5);
+        
+        startLocationExample2 = new Location(6,6);
+        destinationExample2 = new Location(5,2);
+        
+        startLocationExample3 = new Location(0,0);
+        destinationExample3 = new Location(3,4);
     }
 
     /**
@@ -59,6 +72,17 @@ public class LocationTest
         assertEquals(startLocation.distance(destination), 1);
         //Misma prueba utilizando otra aserción:
         assertTrue(startLocation.distance(destination) == 1);
+        
+        /*MIS TEST*/
+        int expectedDistance=5;
+        assertEquals(expectedDistance,startLocationExample1.distance(destinationExample1));
+        
+        expectedDistance=4;
+        assertEquals(expectedDistance,startLocationExample2.distance(destinationExample2));
+        
+        expectedDistance=4;
+        assertEquals(expectedDistance,startLocationExample3.distance(destinationExample3));
+        
     }
 
     /**
@@ -67,9 +91,30 @@ public class LocationTest
     @Test
     public void testAdjacentLocations()
     {
-        //TODO implementar este método
-        // Testear la adyacencia entre dos localizaciones. Se puede hacer 
-        // utilizando llamada al método "nextLocation".
+        int expectedX=2;
+        int expectedY=2;
+        Location nextLocation=startLocation.nextLocation(destination);
+        assertEquals(expectedX,nextLocation.getX());
+        assertEquals(expectedY,nextLocation.getY());
+        
+        
+        expectedX=1;
+        expectedY=1;
+        nextLocation=startLocationExample1.nextLocation(destinationExample1);
+        assertEquals(expectedX,nextLocation.getX());
+        assertEquals(expectedY,nextLocation.getY());
+        
+        expectedX=5;
+        expectedY=5;
+        nextLocation=startLocationExample2.nextLocation(destinationExample2);
+        assertEquals(expectedX,nextLocation.getX());
+        assertEquals(expectedY,nextLocation.getY());
+        
+        expectedX=1;
+        expectedY=1;
+        nextLocation=startLocationExample3.nextLocation(destinationExample3);
+        assertEquals(expectedX,nextLocation.getX());
+        assertEquals(expectedY,nextLocation.getY());
 
     }
 }
