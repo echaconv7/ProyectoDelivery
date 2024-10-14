@@ -9,6 +9,7 @@ public class Location
 {
     public int x;  //TODO cambiar a private
     public int y;  //TODO cambiar a private
+    public int prueba;
 
     /**
      * Model a location in the city.
