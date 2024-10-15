@@ -1,4 +1,5 @@
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +31,28 @@ public class LocationTest
     public LocationTest()
     {
     }
-
+    
+    /**
+     * Test basic creation of an Location.
+     * Ensure that the location throws error if is overflow
+     */
+    @Test
+    public void testCreation()
+    {
+        /*COMRPOBAR QUE SALTA EXCEPCION EN EL CONSTRUCTOR*/
+        assertThrows(IllegalArgumentException.class,()->{
+            new Location(-1,0);
+        });
+        
+        assertThrows(IllegalArgumentException.class,()->{
+            new Location(0,-1);
+        });
+        
+        assertThrows(IllegalArgumentException.class,()->{
+            new Location(-10,-10);
+        });
+    }
+    
     /**
      * Sets up the test fixture.
      *
@@ -96,6 +118,10 @@ public class LocationTest
         Location nextLocation=startLocation.nextLocation(destination);
         assertEquals(expectedX,nextLocation.getX());
         assertEquals(expectedY,nextLocation.getY());
+        //Comprobamos que es adyacente
+        int distanceAdyacent = 1;
+        assertEquals(distanceAdyacent,startLocation.distance(destination));
+        
         
         
         expectedX=1;
@@ -103,18 +129,24 @@ public class LocationTest
         nextLocation=startLocationExample1.nextLocation(destinationExample1);
         assertEquals(expectedX,nextLocation.getX());
         assertEquals(expectedY,nextLocation.getY());
+        //Comprobamos que no es adyacente
+        assertNotEquals(distanceAdyacent,startLocationExample1.distance(destinationExample1));
         
         expectedX=5;
         expectedY=5;
         nextLocation=startLocationExample2.nextLocation(destinationExample2);
         assertEquals(expectedX,nextLocation.getX());
         assertEquals(expectedY,nextLocation.getY());
+        //Comprobamos que no es adyacente
+        assertNotEquals(distanceAdyacent,startLocationExample2.distance(destinationExample2));
         
         expectedX=1;
         expectedY=1;
         nextLocation=startLocationExample3.nextLocation(destinationExample3);
         assertEquals(expectedX,nextLocation.getX());
         assertEquals(expectedY,nextLocation.getY());
+        //Comprobamos que no es adyacente
+        assertNotEquals(distanceAdyacent,startLocationExample3.distance(destinationExample3) );
 
     }
 }

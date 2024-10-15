@@ -118,7 +118,9 @@ public class Order
      */
     public String toString()
     {
-        return "Order "+"info a decidir"+" travelling from " +
+        return "Order: "+ sendingName + " to: " +
+        destinationName+" , Time"+deliveryTime+
+        ",weigth " + weigth +" travelling from " +
         location + " to " + destination;
     }
 

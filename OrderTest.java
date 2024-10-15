@@ -1,4 +1,5 @@
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,6 +60,22 @@ public class OrderTest
         assertFalse (order2.getDeliveryTime () == 11);
         assertTrue (order2.getWeigth () == 1.5);
         assertFalse (order1.getDestinationName () == "Pintores");
+        
+        /*COMRPOBAR QUE SALTA EXCEPCION EN EL CONSTRUCTOR*/
+        assertThrows(NullPointerException.class,()->{
+        new Order("Lucy", null,
+                new Location(2, 6),10, 1.2, "Decathon Cáceres");
+        });
+        
+        assertThrows(NullPointerException.class,()->{
+        new Order("Lucy", new Location(2, 6),
+                null,10, 1.2, "Decathon Cáceres");
+        });
+        
+        assertThrows(NullPointerException.class,()->{
+        new Order("Lucy", null,
+                null,10, 1.2, "Decathon Cáceres");
+        });
     }
 
     /**
