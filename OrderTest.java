@@ -12,6 +12,8 @@ import org.junit.Test;
  */
 public class OrderTest
 {
+    Order order1;
+    Order order2;
     /**
      * Default constructor for test class OrderTest
      */
@@ -27,6 +29,10 @@ public class OrderTest
     @Before
     public void setUp()
     {
+        order1 = new Order("Lucy", new Location(0, 0),
+                new Location(2, 6),10, 1.2, "Decathon Cáceres");
+        order2 = new Order("Gru", new Location(6, 6),
+                new Location(5,2),10, 1.5, "Pintores");
     }
 
     /**
@@ -47,9 +53,12 @@ public class OrderTest
     @Test
     public void testCreation()
     {
-        //TODO implementar este método
-        // Testear la creación correcta de objetos de tipo Order comprobando 
-        // que la inicialización de campos como dirección de recogida y destino es correcta.
+        assertEquals (order1.getLocation(), new Location (0,0));
+        assertEquals (order2.getLocation(), new Location(6,6));
+        assertTrue (order1.getSendingName () == "Lucy");
+        assertFalse (order2.getDeliveryTime () == 11);
+        assertTrue (order2.getWeigth () == 1.5);
+        assertFalse (order1.getDestinationName () == "Pintores");
     }
 
     /**
@@ -59,9 +68,13 @@ public class OrderTest
     @Test
     public void testGetDeliveryPersonName()
     {
-        //TODO implementar este método
-        // Testear el método que devuelve el nombre del la persona que ha hecho el 
-        // reparto
+        order1.setDeliveryPersonName ("Gru");
+        order2.setDeliveryPersonName ("Stevan");
+        
+        assertTrue (order1.getDeliveryPersonName() == "Gru");
+        assertTrue (order2.getDeliveryPersonName() == "Stevan");
+        assertFalse (order2.getDeliveryPersonName() == "Gru");
+        assertFalse (order1.getDeliveryPersonName() == "Stevan");
     }
 
     /**
@@ -71,7 +84,7 @@ public class OrderTest
     @Test
     public void testGetDestination ()
     {
-        //TODO implementar este método
-        // Testear el método que devuelve la dirección de envío del objeto.
+        assertEquals (order1.getDestination(), new Location (2,6));
+        assertEquals (order2.getDestination(), new Location(5,2));
     }
 }

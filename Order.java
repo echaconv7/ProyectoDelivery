@@ -8,12 +8,19 @@
  */
 public class Order
 {
-    //declarar campo sendingName
+    //nombre de la persona o empresa que envia el pedido
+    private String sendingName;
+    //localizacion en la que esta actualmente el pedido
     private Location location;
+    //localizacion en la que debe ser entregado el pedido
     private Location destination;
-    //declarar campo deliveryTime
-    //declarar campo weight
-    //declarar campo destinationName
+    //hora aproximada en la que se estima que se entregara el pedido
+    private int deliveryTime;
+    //peso del pedido
+    private double weigth;
+    //datos de la persona o empresa que recibe el pedido
+    private String destinationName;
+    //nombre de la persona que reparte el pedido
     private String deliveryPersonName;
     
     /**
@@ -27,7 +34,7 @@ public class Order
      * @throws NullPointerException If either location is null.
      */
     public Order(String sendingName, Location location, Location destination, int deliveryTime, 
-    double weight, String destinationName)
+    double weigth, String destinationName)
     {
         //TODO modificar el constructor o crear otro constructor si necesario
         if(location == null) {
@@ -38,16 +45,54 @@ public class Order
         }
         this.location = location;
         this.destination = destination;
-        //incluir inicialización del resto de campos
+        this.sendingName = sendingName;
+        this.deliveryTime = deliveryTime;
+        this.weigth = weigth;
+        this.destinationName = destinationName;
+        this.deliveryPersonName = null;
     }
 
+    /**
+     * @return el nombre de la persona o empresa que envia el pedido
+     */
+    public String getSendingName (){
+        return sendingName;
+    }
+    
+    /**
+     * @return la hora estimada en la que llegara el pedido
+     */
+    public int getDeliveryTime (){
+        return deliveryTime;
+    }
+    
+    /**
+     * @return el peso del pedido
+     */
+    public double getWeigth (){
+        return weigth;
+    }
+    
+    /**
+     * @return el nombre de la persona o empresa que envia el pedido
+     */
+    public Location getLocation (){
+        return location;
+    }
+    
+    /**
+     * @return el nombre de la persona o empresa a la que se envia el pedido
+     */
+    public String getDestinationName (){
+        return destinationName;
+    }
+    
     /**
      * @return The name of the delivery person.
      */
     public String getDeliveryPersonName()
     {
-    //TODO Debe poder devolver el nombre de la persona de reparto.
-    return "";
+        return deliveryPersonName;
     }
 
     /**
@@ -56,7 +101,7 @@ public class Order
      */
     public void setDeliveryPersonName(String deliveryPersonName)
     {
-    //TODO Debe poder modificarse el nombre de la persona de reparto.
+        this.deliveryPersonName = deliveryPersonName;
     }
 
     /**
@@ -64,8 +109,7 @@ public class Order
      */
     public Location getDestination()
     {
-     //TODO Debe poder devolver la localización donde hay que llevar el Order.
-        return null;
+        return destination;
     }
 
     /**
@@ -84,8 +128,9 @@ public class Order
      */
     public String showFinalInfo()
     {
-        // TODO
-        return "";
+        return "Order from: " + sendingName + " to: " +
+        destinationName + " at: " + deliveryTime + " weigth: " +
+        weigth + " from: " + location + " to: " + destination;
     }
 
 }
