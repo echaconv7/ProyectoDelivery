@@ -8,16 +8,19 @@
 public class DeliveryPerson 
 {
     // The Delivery Company of this DeliveryPerson.
-    public DeliveryCompany company;   //TODO cambiar a private
+    private DeliveryCompany company;
     // Where the person is.
-    public Location location;     //TODO cambiar a private
+    private Location location;
     // Where the person is headed.
-    public  Location targetLocation;   //TODO cambiar a private
+    private  Location targetLocation;
     // Record how often the person has nothing to do.
-    public int idleCount;       //TODO cambiar a private
+    private int idleCount;
     //name of the delivery person
-    public String name; //TODO cambiar a private
-    //TODO añadir campos necesarios
+    private String name;
+    // pedido de la persona
+    private Order order;
+    // pedidos entregados
+    private int ordersDelivered;
 
     /**
      * Constructor of class DeliveryPerson
@@ -35,9 +38,10 @@ public class DeliveryPerson
         }
         this.company = company;
         this.location = location;
+        this.order=null;
         targetLocation = null;
         idleCount = 0;
-        //TODO resto de inicializaciones pendientes
+        ordersDelivered=0;
     }
 
     /**
@@ -56,6 +60,33 @@ public class DeliveryPerson
     {
         return location;
     }
+    
+    /**
+     * Get the order
+     * @return Obtiene el pedido
+     */
+    public Order getOrder()
+    {
+        return order;
+    }
+    
+    /**
+     * Borra el pedido
+     */
+    private void clearOrder()
+    {
+        this.order=null;
+    }
+    
+    /**
+     * Set Order
+     *  @param order
+     */
+    private void setOrder(Order order)
+    {
+        this.order=order;
+    }
+    
 
     /**
      * Set the current location.
@@ -95,6 +126,14 @@ public class DeliveryPerson
         else {
             throw new NullPointerException();
         }
+    }
+    
+    /**
+     * Comprueba que la posicion en la cual estoy sea igual a la de destino
+     * @return devuelve si la posicion en la cual estoy sea igual a la de destino
+     */
+    public boolean hasArriveToLocationTarget(){
+        return getLocation().equals(targetLocation);
     }
 
     /**
@@ -155,8 +194,7 @@ public class DeliveryPerson
      */
     public boolean isFree()
     {
-        //TODO  implementar este método
-        return true;
+        return getOrder()==null?true:false;
     }
 
     /**
@@ -164,7 +202,7 @@ public class DeliveryPerson
      */
     public void notifyPickupArrival()
     {
-        //TODO  implementar este método
+        company.arrivedAtPickup(this);
     }
 
     /**
@@ -172,7 +210,7 @@ public class DeliveryPerson
      */
     public void notifyOrderArrival(Order order)
     {
-        //TODO  implementar este método
+        company.arrivedAtDestination(this,order);
     }
 
     /**
@@ -182,8 +220,9 @@ public class DeliveryPerson
      */
     public void pickup(Order order)
     {
-        //TODO  implementar este método
-
+        this.order=order;
+        this.location=order.getLocation();
+        this.targetLocation=order.getLocation();
     }
 
     /**
@@ -191,7 +230,9 @@ public class DeliveryPerson
      */
     public void deliverOrder()
     {
-        //TODO  implementar este método
+        clearTargetLocation();
+        clearOrder();
+        ordersDelivered++;
     }
 
     /**
@@ -199,8 +240,7 @@ public class DeliveryPerson
      */
     public int ordersDelivered()
     {
-        //TODO  implementar este método
-        return 1;
+        return ordersDelivered;
     }
 
     /**
@@ -208,7 +248,7 @@ public class DeliveryPerson
      */
     protected void incrementOrdersDelivered()
     {
-        //TODO  implementar este método
+       ordersDelivered++;
     }
 
     /**
@@ -217,9 +257,7 @@ public class DeliveryPerson
      */
     public int distanceToTheTargetLocation()
     {
-        //TODO  implementar este método
-        return 1;
-
+        return getLocation().distance(getTargetLocation());
     }
 
     /**
@@ -227,7 +265,18 @@ public class DeliveryPerson
      */
     public void act()
     {
-        //TODO  implementar este método
+        if(getTargetLocation()==null){
+            incrementIdleCount();
+        }else{
+            Location nextLocation = getLocation().nextLocation(getTargetLocation());
+            setLocation(nextLocation);
+            if(hasArriveToLocationTarget() && getOrder()==null){
+                notifyPickupArrival();
+            }else if(hasArriveToLocationTarget() && getOrder()!=null){
+                notifyOrderArrival(this.getOrder());
+                deliverOrder();
+            }
+        }
     }
  
     /**
@@ -237,8 +286,7 @@ public class DeliveryPerson
      */
     public String showFinalInfo()
     {
-        //TODO  implementar este método
-        return "";
+        return "name:"+getName()+",location:"+getLocation()+", numbers of delivered order:"+this.ordersDelivered+",step without moving"+this.idleCount;
 
     }
 

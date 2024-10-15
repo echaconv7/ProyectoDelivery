@@ -38,7 +38,6 @@ public class DeliveryPersonTest
         Location pickup = new Location(1, 2);
         Location destination = new Location(5, 6);
 
-         
         order = new Order("Kevin", pickup, destination,10, 1.2, "Decathon Cáceres");
         dp = new DeliveryPerson(company, dpLocation,"DP1");
         //TODO
@@ -72,7 +71,13 @@ public class DeliveryPersonTest
     @Test
     public void testPickup()
     {
-        //TODO implementar este método
+        boolean expected=true;
+        assertEquals(expected, dp.isFree());
+        
+        expected=false;
+        dp.pickup(order);
+        assertEquals(expected, dp.isFree());
+        //TODO implementar mas test
     }
 
     /**
@@ -81,7 +86,15 @@ public class DeliveryPersonTest
      */
     public void testDeliverOrder()
     {
-        //TODO implementar este método
+        boolean expectedIsFree=false;
+        dp.pickup(order);
+        assertEquals(expectedIsFree, dp.isFree());
+        
+        dp.ordersDelivered();
+        expectedIsFree=true;
+        assertEquals(expectedIsFree, dp.isFree());
+        
+        //TODO implementar mas test
     }
 
     /**
