@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=DeliveryCompany
-comment0.text=\r\n\ Model\ the\ operation\ of\ a\ taxi\ company,\ operating\ different\r\n\ delivery\ persons.\ This\ version\ operates\ a\ single\ type\ of\ delivery\ person.\r\n\ \r\n\ @author\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling\r\n\ @version\ 2024.10.07\ DP\ classes\r\n
+comment0.text=\r\n\ Model\ the\ operation\ of\ a\ taxi\ company,\ operating\ different\r\n\ delivery\ persons.\ This\ version\ operates\ a\ single\ type\ of\ delivery\ person.\r\n\ \r\n\ @author\ Elena\ Chacon\ y\ Jose\ Antonio\r\n\ @version\ 2024.10.07\ DP\ classes\r\n
 comment1.params=name
 comment1.target=DeliveryCompany(java.lang.String)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ DeliveryCompany\r\n

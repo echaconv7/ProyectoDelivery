@@ -1,16 +1,23 @@
 import java.util.*;
+import java.util.List;
 
 /**
  * Model the operation of a taxi company, operating different
  * delivery persons. This version operates a single type of delivery person.
  * 
- * @author David J. Barnes and Michael Kölling
+ * @author Elena Chacon y Jose Antonio
  * @version 2024.10.07 DP classes
  */
 public class DeliveryCompany  
 {
-    // TODO definir todos sus campos
-    private String name;  //nombre de la compañía
+    //nombre de la compañía
+    private String name;
+    
+    //objetos de tipo DeliveryPerson que almacena la compañia
+    private ArrayList <DeliveryPerson> deliveryPersons;
+    
+    //almacen de la compañia donde se almacenan los orders
+    private ArrayList <Order> wareHouse;
 
     /**
      * Constructor for objects of class DeliveryCompany
@@ -18,8 +25,8 @@ public class DeliveryCompany
     public DeliveryCompany(String name)
     {
         this.name = name;
-        //TODO implementar el resto del constructor 
-
+        this.deliveryPersons = new ArrayList <DeliveryPerson>();
+        this.wareHouse = new ArrayList <Order> ();
     }
 
     /**
@@ -34,10 +41,8 @@ public class DeliveryCompany
      * @return The list of delivery persons.
      */
     public List<DeliveryPerson> getDeliveryPersons()
-    {       
-        //TODO implementar el método 
-
-        return null;
+    {        
+        return this.deliveryPersons;
     }
 
     /**
@@ -45,9 +50,7 @@ public class DeliveryCompany
      */
     public List<Order> getOrders()
     {
-        //TODO implementar el método 
-
-        return null;
+        return this.wareHouse;
     }
 
     /**
@@ -55,7 +58,7 @@ public class DeliveryCompany
      */
     public void addDeliveryPerson(DeliveryPerson dp)
     {
-        //TODO implementar el método 
+        deliveryPersons.add(dp);
     }
 
     /**
@@ -64,8 +67,7 @@ public class DeliveryCompany
      */
     public void addOrder(Order order)
     {
-        //TODO implementar el método 
-
+        wareHouse.add(order); 
     }
 
     /**
@@ -74,9 +76,15 @@ public class DeliveryCompany
      */
     private DeliveryPerson getDeliveryPerson()
     {
-        //TODO implementar el método 
+        DeliveryPerson libre=null;
+        Collections.sort(deliveryPersons, new ComparadorDistanciaAlmacenDestino());
+        for (DeliveryPerson dp : deliveryPersons){
+            if (dp.isFree()){
+                libre = dp;
+            }
+        }
 
-        return null;
+        return libre;
     }
 
     /**
