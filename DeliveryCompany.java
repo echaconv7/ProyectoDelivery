@@ -76,14 +76,15 @@ public class DeliveryCompany
      */
     private DeliveryPerson getDeliveryPerson()
     {
+        boolean enc=false;
         DeliveryPerson libre=null;
         Collections.sort(deliveryPersons, new ComparadorDistanciaAlmacenDestino());
-        for (DeliveryPerson dp : deliveryPersons){
-            if (dp.isFree()){
-                libre = dp;
+        for (int i=0; i<deliveryPersons.size() && !enc; i++){
+            if (deliveryPersons.get(i).isFree()){
+                libre = deliveryPersons.get(i);
+                enc=true;
             }
         }
-
         return libre;
     }
 
@@ -94,8 +95,16 @@ public class DeliveryCompany
      */
     public boolean requestPickup(Order order)
     {
-        //TODO implementar el método 
-        return true;
+        DeliveryPerson libre = getDeliveryPerson();
+        boolean request;
+        if (libre != null){
+            libre.setPickupLocation(order.getLocation());
+            request = true;
+        }
+        else {
+            request=false;
+        }
+        return request;
     }
 
     /**
@@ -104,11 +113,19 @@ public class DeliveryCompany
      */
     public void arrivedAtPickup(DeliveryPerson dp)
     {
-        //TODO implementar el método
+        Order order = getOrders().get(0);
+        if (dp.hasArriveToLocationTarget()){
+            dp.pickup (order);
+            order.setDeliveryPersonName(dp.getName());
+            dp.setTargetLocation (order.getDestination());
+        }
         //TODO Descomentar siguiente línea cuando esté el método completamente implementado
-        //System.out.println("<<<< "+dp + " picks up order to " + order.getDestinationName());
+        System.out.println("<<<< "+dp + " picks up order to " + order.getDestinationName());
         //TODO el order debe guardar el nombre de la persona de reparto que le ha recogido
         //TODO la persona de reparto debe recoger el pedido
+         System.out.println ("DeliveryPerson "+dp.getName() + " at " +
+        dp.getLocation() +" delivers order from " + order.getSendingName() + " to "+
+        order.getLocation());
     }
 
     /**
@@ -118,5 +135,11 @@ public class DeliveryCompany
      */
     public void arrivedAtDestination(DeliveryPerson dp, Order order) {
         System.out.println(dp + " delivers " + order);
+        if (dp.hasArriveToLocationTarget()){
+            System.out.println ("DeliveryPerson " + dp.getName() + 
+            " at " + dp.getLocation() + " delivers Order " + order +
+            " at " + order.getDeliveryTime() + " travelling from " +
+            order.getLocation() + " to " + order.getDestination ());
+        }
     }
 }
