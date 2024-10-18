@@ -130,9 +130,7 @@ public class Order
      */
     public String showFinalInfo()
     {
-        return "Order from: " + sendingName + " to: " +
-        destinationName + " at: " + deliveryTime + " weigth: " +
-        weigth + " from: " + location + " to: " + destination;
+        return "Order at: "+getDeliveryTime()+" from: "+getDeliveryPersonName()+" to: "+getDestinationName();
     }
 
 }

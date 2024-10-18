@@ -185,7 +185,7 @@ public class DeliveryPerson
      */
     public String toString()
     {
-        return getClass().getName() + " " +getName()+" at " + getLocation();
+        return "DeliveryPerson "+getName()+" at location "+location.getX()+","+location.getY();
     }
 
     /**
@@ -286,8 +286,8 @@ public class DeliveryPerson
      */
     public String showFinalInfo()
     {
-        return "name:"+getName()+",location:"+getLocation()+", numbers of delivered order:"+this.ordersDelivered+",step without moving"+this.idleCount;
+        return "DeliveryPerson "+getName()+" at location "+location.getX()+","+location.getY()+" - orders delivered: "+ordersDelivered()+" - non active for: "+getIdleCount()+" times";
 
     }
-
+    
 }
