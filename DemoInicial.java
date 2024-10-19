@@ -73,7 +73,7 @@ public class DemoInicial
         DeliveryPerson dp1 = new DeliveryPerson(company, new Location(3, 3),"DP2");
         DeliveryPerson dp2 = new DeliveryPerson(company, new Location(10, 10),"DP1");
         DeliveryPerson dp3 = new DeliveryPerson(company, new Location(12, 14),"DP3");
-
+        
         company.addDeliveryPerson(dp1);
         company.addDeliveryPerson(dp2);
         company.addDeliveryPerson(dp3);
@@ -84,11 +84,12 @@ public class DemoInicial
      * Orders are created and added to the company
      */
     private void createOrders() {
-        Order order1 = new Order("Lucy", new Location(0, 0),
+        Location whLocation=company.getlocationWareHouse();
+        Order order1 = new Order("Lucy", whLocation,
                 new Location(2, 6),10, 1.2, "Decathon Cáceres");
-        Order order2 = new Order("Gru", new Location(6, 6),
+        Order order2 = new Order("Gru", whLocation,
                 new Location(5,2),10, 1.5, "Pintores");
-        Order order3 = new Order("Kevin", new Location(10, 4),
+        Order order3 = new Order("Kevin", whLocation,
                 new Location(14,2),11, 2.2, "Ruta de la Plata");
         company.addOrder(order1);
         company.addOrder(order2);
@@ -103,6 +104,9 @@ public class DemoInicial
         List<Order> orders = company.getOrders();
         //TODO: Ordenar los pedidos ascendentemente por su hora de llegada y 
         //en caso de empate por el nombre de la persona de destino
+        
+        Collections.sort(orders,new ComparadorTimeAndSendingNameOrder());
+        
         for(Order order : orders) {
             if(!company.requestPickup(order)) {
                 throw new IllegalStateException("Failed to find a pickup.");        
@@ -121,8 +125,9 @@ public class DemoInicial
         System.out.println("-->> ------------------------------- <<--");
         //TODO ordenar (por su nombre) y mostrar los objetos delivery persons
         //Collections.sort(lista de objetos DeliveryPersons, new ComparadorNombreDeliveryPerson());
-
-        System.out.println(" ");        
+        actors.stream().sorted(new ComparadorNombreDeliveryPerson()).forEach((actor)->System.out.println(actor));
+        
+        System.out.println(" ");
         System.out.println("-->> Orders to be picked up <<--");
         System.out.println("-->> ---------------------- <<--");
         //TODO ordenar (por el nombre de la persona que envía) y mostrar los pedidos
@@ -130,6 +135,10 @@ public class DemoInicial
         //la sintaxis (suponiendo que "orders" es una colección donde
         //la compañía almacena los pedidos):
         //Collections.sort(orders, new ComparadorOrderDeliveryPersonName());
+        List<Order> orders = company.getOrders();
+        orders.stream()
+        .sorted(new ComparadorOrderDeliveryPersonName())
+        .forEach((order)->System.out.println(order.getStringShortDetail()));
 
 
         System.out.println(" ");        
@@ -153,12 +162,18 @@ public class DemoInicial
         System.out.println("-->> ---------------------------------- <<--");
         //TODO ordenar (por número de pedidos entregados y si empate por nombre) 
         // y mostrar los objetos delivery persons
-
+        actors.stream()
+        .sorted(new ComparadorDeliveryPersonOrdersDeliveredAndName())
+        .forEach((actor)->System.out.println( actor.showFinalInfo() ));
+        
         System.out.println(" ");
         System.out.println("-->> Orders final information <<--");
         System.out.println("-->> ------------------------ <<--");
         //TODO ordenar (por hora de entrega y si empate por nombre de la persona 
         //  que recibe el pedido) y mostrar los pedidos
-
+        List<Order> orders = company.getOrders();
+        orders.stream()
+        .sorted(new ComparadorTimeAndSendingNameOrder())
+        .forEach((order)-> System.out.println(order.showFinalInfo()) );
     }
 }

@@ -18,13 +18,15 @@ public class Location
      */
     public Location(int x, int y)
     {
-        if(x < 0) {
+        int inferiorLimit=0;
+        int superiorLimit=19;
+        if(x<inferiorLimit || x>superiorLimit) {
             throw new IllegalArgumentException(
-                "Negative x-coordinate: " + x);
+                "x-cordinate is not in range of("+inferiorLimit+"-"+superiorLimit+") the number introduce is: " + x);
         }
-        if(y < 0) {
+        if(y<inferiorLimit || y>superiorLimit) {
             throw new IllegalArgumentException(
-                "Negative y-coordinate: " + y);
+                "y-cordinate is not in range of("+inferiorLimit+"-"+superiorLimit+") the number introduce is: " + y);
         }        
         this.x = x;
         this.y = y;
@@ -86,6 +88,13 @@ public class Location
             distance++;
         }
         return distance;
+    }
+    
+    /**
+     * @return  string de las coordenadas separadas con un guion.
+     */
+    public String getStringConcatenateLocation(){
+        return getX()+" - " +getY();
     }
 
     /**

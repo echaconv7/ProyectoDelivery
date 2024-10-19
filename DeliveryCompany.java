@@ -17,7 +17,7 @@ public class DeliveryCompany
     private ArrayList <DeliveryPerson> deliveryPersons;
     
     //almacen de la compañia donde se almacenan los orders
-    private ArrayList <Order> wareHouse;
+    private WareHouse wareHouse;
 
     /**
      * Constructor for objects of class DeliveryCompany
@@ -26,7 +26,7 @@ public class DeliveryCompany
     {
         this.name = name;
         this.deliveryPersons = new ArrayList <DeliveryPerson>();
-        this.wareHouse = new ArrayList <Order> ();
+        this.wareHouse = new WareHouse();
     }
 
     /**
@@ -50,7 +50,7 @@ public class DeliveryCompany
      */
     public List<Order> getOrders()
     {
-        return this.wareHouse;
+        return this.wareHouse.getOrders();
     }
 
     /**
@@ -67,7 +67,7 @@ public class DeliveryCompany
      */
     public void addOrder(Order order)
     {
-        wareHouse.add(order); 
+        wareHouse.addOrder(order); 
     }
 
     /**
@@ -76,13 +76,14 @@ public class DeliveryCompany
      */
     private DeliveryPerson getDeliveryPerson()
     {
-        boolean enc=false;
+        boolean encontrado=false;
         DeliveryPerson libre=null;
-        Collections.sort(deliveryPersons, new ComparadorDistanciaAlmacenDestino());
-        for (int i=0; i<deliveryPersons.size() && !enc; i++){
-            if (deliveryPersons.get(i).isFree()){
+        Collections.sort(deliveryPersons, new ComparadorDistanciaTargetBetweenDeliveriesPersonsAndName(getlocationWareHouse()));
+        for (int i=0; i<deliveryPersons.size() && !encontrado; i++){
+            DeliveryPerson actualDeliveryPerson=deliveryPersons.get(i);
+            if (actualDeliveryPerson.isFree() && !actualDeliveryPerson.hasTargetLocation()){
                 libre = deliveryPersons.get(i);
-                enc=true;
+                encontrado=true;
             }
         }
         return libre;
@@ -98,7 +99,8 @@ public class DeliveryCompany
         DeliveryPerson libre = getDeliveryPerson();
         boolean request;
         if (libre != null){
-            libre.setPickupLocation(order.getLocation());
+            Location locationAlmacen = getlocationWareHouse();
+            libre.setPickupLocation(locationAlmacen);
             request = true;
         }
         else {
@@ -116,16 +118,12 @@ public class DeliveryCompany
         Order order = getOrders().get(0);
         if (dp.hasArriveToLocationTarget()){
             dp.pickup (order);
+            wareHouse.removeOrder(order);
             order.setDeliveryPersonName(dp.getName());
             dp.setTargetLocation (order.getDestination());
         }
-        //TODO Descomentar siguiente línea cuando esté el método completamente implementado
-        System.out.println("<<<< "+dp + " picks up order to " + order.getDestinationName());
-        //TODO el order debe guardar el nombre de la persona de reparto que le ha recogido
-        //TODO la persona de reparto debe recoger el pedido
-         System.out.println ("DeliveryPerson "+dp.getName() + " at " +
-        dp.getLocation() +" delivers order from " + order.getSendingName() + " to "+
-        order.getLocation());
+        
+        System.out.println("<<<< "+dp + " picks up Order from "+dp.getOrder().getSendingName()+" to: " + dp.getTargetLocation());
     }
 
     /**
@@ -134,12 +132,18 @@ public class DeliveryCompany
      * @param order The order being dropped off.
      */
     public void arrivedAtDestination(DeliveryPerson dp, Order order) {
-        System.out.println(dp + " delivers " + order);
         if (dp.hasArriveToLocationTarget()){
-            System.out.println ("DeliveryPerson " + dp.getName() + 
-            " at " + dp.getLocation() + " delivers Order " + order +
-            " at " + order.getDeliveryTime() + " travelling from " +
-            order.getLocation() + " to " + order.getDestination ());
+            System.out.println("<<<< DeliveryPerson "+dp.getName()+" at location "+dp.getLocation().getX()+","+dp.getLocation().getY()+" delivers Order at: "+order.getDeliveryTime()
+            +" from: "+order.getSendingName()+" to: "+order.getDestinationName());
         }
     }
+    
+     /**
+     * obtener la localizacion del wareHouse
+     * @return localizacion del wareHouse
+     */
+    public Location getlocationWareHouse(){
+        return this.wareHouse.getLocation();
+    }
+    
 }

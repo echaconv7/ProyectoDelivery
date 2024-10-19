@@ -9,6 +9,6 @@ import java.util.*;
 public class ComparadorNombreDeliveryPerson implements Comparator<DeliveryPerson>
 {
     public int compare(DeliveryPerson dp1, DeliveryPerson dp2){  
-        return (dp1.getName().compareTo(dp2.getName()));
+        return dp1.getName().compareTo(dp2.getName());
     } 
 }

@@ -38,6 +38,7 @@ public class DeliveryPerson
         }
         this.company = company;
         this.location = location;
+        this.name=name;
         this.order=null;
         targetLocation = null;
         idleCount = 0;
@@ -142,8 +143,12 @@ public class DeliveryPerson
      * @param location The pickup location.
      */
     public void setPickupLocation(Location location)
-    {
+    {   
         setTargetLocation(location);
+        System.out.println("<<<< DeliveryPerson "+getName()+
+        " at location "+getLocation().getX()+","+getLocation().getY()+
+        " go to pick up order from Lucy at location "+getTargetLocation().getX()
+        +","+getTargetLocation().getY());
     }
 
     /**
@@ -194,7 +199,7 @@ public class DeliveryPerson
      */
     public boolean isFree()
     {
-        return getOrder()==null?true:false;
+        return getOrder()==null;
     }
 
     /**
@@ -261,6 +266,15 @@ public class DeliveryPerson
     }
 
     /**
+     * Move to next location
+     */
+    public void moveToNextLocation(){
+        Location nextLocation = getLocation().nextLocation(getTargetLocation());
+        setLocation(nextLocation);
+        System.out.println("@@@  DeliveryPerson: "+getName()+" moving to: "+getLocation().getStringConcatenateLocation());
+    }
+    
+    /**
      * Carry out a delivery person's actions.
      */
     public void act()
@@ -268,11 +282,11 @@ public class DeliveryPerson
         if(getTargetLocation()==null){
             incrementIdleCount();
         }else{
-            Location nextLocation = getLocation().nextLocation(getTargetLocation());
-            setLocation(nextLocation);
-            if(hasArriveToLocationTarget() && getOrder()==null){
+            moveToNextLocation();
+            
+            if(hasArriveToLocationTarget() && isFree()){
                 notifyPickupArrival();
-            }else if(hasArriveToLocationTarget() && getOrder()!=null){
+            }else if(hasArriveToLocationTarget() && !isFree()){
                 notifyOrderArrival(this.getOrder());
                 deliverOrder();
             }

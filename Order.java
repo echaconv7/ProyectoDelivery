@@ -113,15 +113,24 @@ public class Order
     }
 
     /**
+     * Return a short detail of representation of order
+     * @return A string representation of the order.
+     */
+    public String getStringShortDetail()
+    {
+        return "Order at: "+getDeliveryTime()+" from: "+getSendingName()+" to: "+getDestinationName();
+    }
+    
+    /**
      * Return details of the passenger, such as where it is.
      * @return A string representation of the passenger.
      */
     public String toString()
     {
-        return "Order: "+ sendingName + " to: " +
-        destinationName+" , Time"+deliveryTime+
-        ",weigth " + weigth +" travelling from " +
-        location + " to " + destination;
+        return "Order from: "+ sendingName + " to: " +
+        destinationName+" at: "+deliveryTime+
+        " weigth: " + weigth +" from: " +
+        location.getStringConcatenateLocation()+ " to: " + destination.getStringConcatenateLocation();
     }
 
     /**
@@ -130,7 +139,7 @@ public class Order
      */
     public String showFinalInfo()
     {
-        return "Order at: "+getDeliveryTime()+" from: "+getDeliveryPersonName()+" to: "+getDestinationName();
+        return "Order delivered at: "+getDeliveryTime()+" by: "+getDeliveryPersonName()+" to: "+getDestinationName()+" from: "+getSendingName();
     }
 
 }

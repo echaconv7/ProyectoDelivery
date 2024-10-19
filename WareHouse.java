@@ -47,6 +47,22 @@ public class WareHouse
         return this.orders.get(index);
     }
     
+    /**
+     * Obtiene la lista entera del wareHouse
+     * @return     la lista de orders
+     */
+    public List<Order> getOrders()
+    {
+        return this.orders;
+    }
+    
+     /**
+     * Borra un pedido
+     */
+    public void removeOrder(Order order){
+        orders.remove(order);
+    }
+    
        /**
      * Obtiene la localizacion
      * 
