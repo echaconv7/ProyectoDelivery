@@ -74,7 +74,7 @@ public class DeliveryCompany
      * Find a the most closed free delivery person to the whare house's location, if any.
      * @return A free delivery person, or null if there is none.
      */
-    private DeliveryPerson getDeliveryPerson()
+    public DeliveryPerson getDeliveryPerson()
     {
         boolean encontrado=false;
         DeliveryPerson libre=null;

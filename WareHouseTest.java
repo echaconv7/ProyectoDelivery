@@ -57,7 +57,7 @@ public class WareHouseTest
         String nameExpected="Melany";
         int timeExpected=3;
         int position=0;
-        Order orderInPositionTesting = wareHouse.getOrders(position);
+        Order orderInPositionTesting = wareHouse.getOrder(position);
         
         assertEquals(nameExpected,orderInPositionTesting.getSendingName());
         assertTrue(orderInPositionTesting.getDeliveryTime()==timeExpected);
@@ -66,7 +66,7 @@ public class WareHouseTest
         nameExpected="Lucy";
         timeExpected=6;
         position=1;
-        orderInPositionTesting = wareHouse.getOrders(position);
+        orderInPositionTesting = wareHouse.getOrder(position);
         
         assertEquals(nameExpected,orderInPositionTesting.getSendingName());
         assertTrue(orderInPositionTesting.getDeliveryTime()==timeExpected);
@@ -75,7 +75,7 @@ public class WareHouseTest
         nameExpected="Antonio";
         timeExpected=10;
         position=2;
-        orderInPositionTesting = wareHouse.getOrders(position);
+        orderInPositionTesting = wareHouse.getOrder(position);
         
         assertEquals(nameExpected,orderInPositionTesting.getSendingName());
         assertTrue(orderInPositionTesting.getDeliveryTime()==timeExpected);

@@ -83,7 +83,7 @@ public class DeliveryPerson
      * Set Order
      *  @param order
      */
-    private void setOrder(Order order)
+    public void setOrder(Order order)
     {
         this.order=order;
     }
