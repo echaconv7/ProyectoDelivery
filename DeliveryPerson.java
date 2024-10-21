@@ -145,10 +145,6 @@ public class DeliveryPerson
     public void setPickupLocation(Location location)
     {   
         setTargetLocation(location);
-        System.out.println("<<<< DeliveryPerson "+getName()+
-        " at location "+getLocation().getX()+","+getLocation().getY()+
-        " go to pick up order from Lucy at location "+getTargetLocation().getX()
-        +","+getTargetLocation().getY());
     }
 
     /**
@@ -228,6 +224,9 @@ public class DeliveryPerson
         this.order=order;
         this.location=order.getLocation();
         this.targetLocation=order.getLocation();
+        
+        order.setDeliveryPersonName(getName());
+        setTargetLocation(order.getDestination());
     }
 
     /**

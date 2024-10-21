@@ -104,8 +104,7 @@ public class DemoInicial
         List<Order> orders = company.getOrders();
         //TODO: Ordenar los pedidos ascendentemente por su hora de llegada y 
         //en caso de empate por el nombre de la persona de destino
-        
-        Collections.sort(orders,new ComparadorTimeAndSendingNameOrder());
+        Collections.sort(orders,new ComparadorTimeAndDestinationNameOrder());
         
         for(Order order : orders) {
             if(!company.requestPickup(order)) {
@@ -173,7 +172,7 @@ public class DemoInicial
         //  que recibe el pedido) y mostrar los pedidos
         List<Order> orders = company.getOrders();
         orders.stream()
-        .sorted(new ComparadorTimeAndSendingNameOrder())
+        .sorted(new ComparadorTimeAndDestinationNameOrder())
         .forEach((order)-> System.out.println(order.showFinalInfo()) );
     }
 }

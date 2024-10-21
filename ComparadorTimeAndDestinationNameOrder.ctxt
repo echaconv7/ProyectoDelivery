@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.target=ComparadorNombreDeliveryPerson
+comment0.target=ComparadorTimeAndDestinationNameOrder
 comment0.text=\r\n\ Compare\ delivery\ persons\ by\ name\ in\ ascending\ order.\r\n\ \r\n\ @author\ DP\ Clasess\r\n\ @version\ 2024.10.07\ DP\ classes\r\n
-comment1.params=dp1\ dp2
-comment1.target=int\ compare(DeliveryPerson,\ DeliveryPerson)
+comment1.params=order1\ order2
+comment1.target=int\ compare(Order,\ Order)
 numComments=2

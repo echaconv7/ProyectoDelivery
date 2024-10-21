@@ -6,7 +6,7 @@ import java.util.*;
  * @author DP Clasess
  * @version 2024.10.07 DP classes
  */
-public class ComparadorTimeAndSendingNameOrder implements Comparator<Order>
+public class ComparadorTimeAndDestinationNameOrder implements Comparator<Order>
 {
     public int compare(Order order1, Order order2){  
         if(order1.getDeliveryTime()<order2.getDeliveryTime()){
@@ -15,6 +15,6 @@ public class ComparadorTimeAndSendingNameOrder implements Comparator<Order>
             return 1;
         }
         // Si es igual el tiempo
-        return order1.getSendingName().compareTo(order2.getSendingName());
+        return order1.getDestinationName().compareTo(order2.getDestinationName());
     }
 }

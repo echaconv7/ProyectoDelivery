@@ -123,6 +123,8 @@ public class DemoAvanzada
         List<Order> orders = company.getOrders();
         //TODO: Ordenar los pedidos ascendentemente por su hora de llegada y 
         //en caso de empate por el nombre de la persona de destino
+        Collections.sort(orders,new ComparadorTimeAndDestinationNameOrder());
+          
         for(Order order : orders) {
             if(!company.requestPickup(order)) {
                 throw new IllegalStateException("Failed to find a pickup.");        
@@ -141,7 +143,8 @@ public class DemoAvanzada
         System.out.println("-->> ------------------------------- <<--");
         //TODO ordenar (por su nombre) y mostrar los objetos delivery persons
         //Collections.sort(lista de objetos DeliveryPersons, new ComparadorNombreDeliveryPerson());
-
+        actors.stream().sorted(new ComparadorNombreDeliveryPerson()).forEach((actor)->System.out.println(actor));
+        
         System.out.println(" ");        
         System.out.println("-->> Orders to be picked up <<--");
         System.out.println("-->> ---------------------- <<--");
@@ -150,7 +153,10 @@ public class DemoAvanzada
         //la sintaxis (suponiendo que "orders" es una colección donde
         //la compañía almacena los pedidos):
         //Collections.sort(orders, new ComparadorOrderDeliveryPersonName());
-
+        List<Order> orders = company.getOrders();
+        orders.stream()
+        .sorted(new ComparadorOrderDeliveryPersonName())
+        .forEach((order)->System.out.println(order.getStringShortDetail()));
 
         System.out.println(" ");        
         System.out.println("-->> Simulation start <<--");
@@ -173,12 +179,18 @@ public class DemoAvanzada
         System.out.println("-->> ---------------------------------- <<--");
         //TODO ordenar (por número de pedidos entregados y si empate por nombre) 
         // y mostrar los objetos delivery persons
-
+        actors.stream()
+        .sorted(new ComparadorDeliveryPersonOrdersDeliveredAndName())
+        .forEach((actor)->System.out.println( actor.showFinalInfo() ));
+        
         System.out.println(" ");
         System.out.println("-->> Orders final information <<--");
         System.out.println("-->> ------------------------ <<--");
         //TODO ordenar (por hora de entrega y si empate por nombre de la persona 
         //  que recibe el pedido) y mostrar los pedidos
-
+        List<Order> orders = company.getOrders();
+        orders.stream()
+        .sorted(new ComparadorTimeAndDestinationNameOrder())
+        .forEach((order)-> System.out.println(order.showFinalInfo()) );
     }
 }

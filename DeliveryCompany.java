@@ -96,11 +96,18 @@ public class DeliveryCompany
      */
     public boolean requestPickup(Order order)
     {
-        DeliveryPerson libre = getDeliveryPerson();
+        DeliveryPerson personaLibre = getDeliveryPerson();
         boolean request;
-        if (libre != null){
+        if (personaLibre != null){
             Location locationAlmacen = getlocationWareHouse();
-            libre.setPickupLocation(locationAlmacen);
+            order.setDeliveryPersonName(personaLibre.getName());
+            personaLibre.setPickupLocation(locationAlmacen);
+            
+            System.out.println("<<<< DeliveryPerson "+personaLibre.getName()+
+            " at location "+personaLibre.getLocation().getX()+","+personaLibre.getLocation().getY()+
+            " go to pick up order from "+order.getSendingName()+" at location "+personaLibre.getTargetLocation().getX()
+            +","+personaLibre.getTargetLocation().getY());
+
             request = true;
         }
         else {
@@ -115,12 +122,11 @@ public class DeliveryCompany
      */
     public void arrivedAtPickup(DeliveryPerson dp)
     {
-        Order order = getOrders().get(0);
+        //Obtiene el primer envio que no esté ocupado
+        Order order = getOrders().stream().filter(orderIteration->orderIteration.getDeliveryPersonName().equals(dp.getName())).findFirst().orElse(null);
         if (dp.hasArriveToLocationTarget()){
             dp.pickup (order);
-            wareHouse.removeOrder(order);
-            order.setDeliveryPersonName(dp.getName());
-            dp.setTargetLocation (order.getDestination());
+            //wareHouse.removeOrder(order);
         }
         
         System.out.println("<<<< "+dp + " picks up Order from "+dp.getOrder().getSendingName()+" to: " + dp.getTargetLocation());

@@ -34,7 +34,7 @@ public class WareHouse
      */
     public void addOrder(Order order){
         orders.add(order);
-        orders.sort(new ComparadorTimeAndSendingNameOrder());
+        orders.sort(new ComparadorTimeAndDestinationNameOrder());
     }
     
     /**
@@ -42,7 +42,7 @@ public class WareHouse
      * @param      indice
      * @return     la order
      */
-    public Order getOrders(int index)
+    public Order getOrder(int index)
     {
         return this.orders.get(index);
     }
