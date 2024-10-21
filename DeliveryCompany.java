@@ -100,7 +100,6 @@ public class DeliveryCompany
         boolean request;
         if (personaLibre != null){
             Location locationAlmacen = getlocationWareHouse();
-            order.setDeliveryPersonName(personaLibre.getName());
             personaLibre.setPickupLocation(locationAlmacen);
             
             System.out.println("<<<< DeliveryPerson "+personaLibre.getName()+
@@ -123,13 +122,13 @@ public class DeliveryCompany
     public void arrivedAtPickup(DeliveryPerson dp)
     {
         //Obtiene el primer envio que no esté ocupado
-        Order order = getOrders().stream().filter(orderIteration->orderIteration.getDeliveryPersonName().equals(dp.getName())).findFirst().orElse(null);
+        Order order = getOrders().stream().filter(orderIteration->orderIteration.getDeliveryPersonName()==null).findFirst().orElse(null);
         if (dp.hasArriveToLocationTarget()){
             dp.pickup (order);
             //wareHouse.removeOrder(order);
+            System.out.println("<<<< "+dp + " picks up Order from "+dp.getOrder().getSendingName()+" to: " + dp.getTargetLocation());
         }
         
-        System.out.println("<<<< "+dp + " picks up Order from "+dp.getOrder().getSendingName()+" to: " + dp.getTargetLocation());
     }
 
     /**

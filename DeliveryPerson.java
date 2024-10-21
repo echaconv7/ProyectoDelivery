@@ -221,7 +221,7 @@ public class DeliveryPerson
      */
     public void pickup(Order order)
     {
-        this.order=order;        
+        setOrder(order);       
         order.setDeliveryPersonName(getName());
         setTargetLocation(order.getDestination());
     }

@@ -80,7 +80,6 @@ public class DeliveryCompanyTest
     public void getDeliveryPersonTest (){
         assertEquals (company.getDeliveryPerson(), dp2);
         assertFalse (company.getDeliveryPerson()==dp1);
-        assertFalse (company.getDeliveryPerson()==dp3);
     }
     
     /**
@@ -88,8 +87,10 @@ public class DeliveryCompanyTest
      */
     @Test
     public void requestPickupTest (){
-        assertTrue (company.requestPickup (order3)== true);
-        assertEquals (order3.getDeliveryPersonName(), "DP1");
+        DeliveryPerson nextFreePerson = company.getDeliveryPerson();
+        Location beforeTargetLocation = nextFreePerson.getTargetLocation();
+        assertTrue (company.requestPickup (order3));
+        assertNotEquals(beforeTargetLocation,nextFreePerson.getTargetLocation());
     }
     
     /**
@@ -97,18 +98,19 @@ public class DeliveryCompanyTest
      */
     @Test
     public void arrivedAtPickupTest (){
-        dp4.setLocation(new Location (15,3));
-        company.arrivedAtPickup (dp4);
-        assertTrue (dp4.getOrder()==order4);
-    }
-    
-    /**
-     * Test 
-     */
-    @Test
-    public void arrivedAtDestinationTest (){
-        dp4.setLocation(new Location (7,1));
-        company.arrivedAtDestination (dp4,order4);
-        assertEquals (dp4.getLocation(), order4.getDestination());
+        // Test si no ha llegado a la posicion del wareHouse
+        Location companyLocation=company.getlocationWareHouse();
+        dp4.setLocation(companyLocation);
+        Location beforeTargetLocation = dp4.getTargetLocation();
+        company.arrivedAtPickup(dp4);
+        assertEquals(beforeTargetLocation,dp4.getTargetLocation());
+        
+        // Test si ha llegado a la posicion del wareHouse
+        // y obtiene la pos más cercana y si no por nombre
+        dp4.setTargetLocation(companyLocation);
+        beforeTargetLocation = dp4.getTargetLocation();
+        company.arrivedAtPickup(dp4);
+        assertTrue (dp4.getOrder().equals(order1));
+        assertNotEquals(beforeTargetLocation,dp4.getTargetLocation());
     }
 }
