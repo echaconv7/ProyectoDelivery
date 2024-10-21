@@ -27,6 +27,7 @@ public class WareHouse
     {
         this();
         this.orders=orders;
+        orders.sort(new ComparadorTimeAndDestinationNameOrder());
     }
     
    /**

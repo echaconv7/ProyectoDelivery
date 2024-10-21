@@ -186,7 +186,7 @@ public class DeliveryPerson
      */
     public String toString()
     {
-        return "DeliveryPerson "+getName()+" at location "+location.getX()+","+location.getY();
+        return "DeliveryPerson "+getName()+" at location "+getLocation().getX()+","+getLocation().getY();
     }
 
     /**
@@ -221,10 +221,7 @@ public class DeliveryPerson
      */
     public void pickup(Order order)
     {
-        this.order=order;
-        this.location=order.getLocation();
-        this.targetLocation=order.getLocation();
-        
+        this.order=order;        
         order.setDeliveryPersonName(getName());
         setTargetLocation(order.getDestination());
     }
