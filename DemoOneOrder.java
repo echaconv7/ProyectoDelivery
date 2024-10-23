@@ -91,8 +91,7 @@ public class DemoOneOrder
      */
     private void runSimulation() {
         List<Order> orders = company.getOrders();
-        //TODO: Ordenar los pedidos ascendentemente por su hora de llegada y 
-        //en caso de empate por el nombre de la persona de destino
+
         Collections.sort(orders,new ComparadorTimeAndDestinationNameOrder());
         
         for(Order order : orders) {
@@ -111,26 +110,26 @@ public class DemoOneOrder
         System.out.println("--->> Simulation of the company: "+company.getName()+" <<---");
         System.out.println("-->> Delivery persons of the company <<--");
         System.out.println("-->> ------------------------------- <<--");
-        //TODO ordenar (por su nombre) y mostrar los objetos delivery persons
-        //Collections.sort(lista de objetos DeliveryPersons, new ComparadorNombreDeliveryPerson());
-        actors.stream()
-        .sorted(new ComparadorNombreDeliveryPerson()).forEach((actor)->{
-            System.out.println(actor);
-        });
-
-        System.out.println(" ");        
+        
+        List<DeliveryPerson> actorsSort = new ArrayList<>(actors);
+        Collections.sort(actorsSort, new ComparadorNombreDeliveryPerson());
+        Iterator<DeliveryPerson> iteratorActors = actorsSort.iterator();
+        while(iteratorActors.hasNext()){
+            System.out.println(iteratorActors.next());
+        }
+     
+        System.out.println(" ");
         System.out.println("-->> Orders to be picked up <<--");
         System.out.println("-->> ---------------------- <<--");
-        //TODO ordenar (por el nombre de la persona que envía) y mostrar los pedidos
-        //para ordenar una colección aplicando un comparador, esta sería 
-        //la sintaxis (suponiendo que "orders" es una colección donde
-        //la compañía almacena los pedidos):
-        //Collections.sort(orders, new ComparadorOrderDeliveryPersonName());
-        List<Order> orders = company.getOrders();
-        orders.stream()
-        .sorted(new ComparadorOrderDeliveryPersonName())
-        .forEach((order)->System.out.println(order));
-
+        
+        List<Order> orders = new ArrayList<>(company.getOrders());
+        Collections.sort(orders, new ComparadorOrderDeliveryPersonName());
+        
+        Iterator<Order> iteratorOrders = orders.iterator();
+        while(iteratorOrders.hasNext()){
+            Order order = iteratorOrders.next();
+            System.out.println(order);
+        }
 
         System.out.println(" ");        
         System.out.println("-->> Simulation start <<--");
@@ -151,19 +150,16 @@ public class DemoOneOrder
 
         System.out.println("-->> Delivery persons final information <<--");
         System.out.println("-->> ---------------------------------- <<--");
-        //TODO ordenar (por número de pedidos entregados y si empate por nombre) 
-        // y mostrar los objetos delivery persons
+
         actors.stream()
         .sorted(new ComparadorDeliveryPersonOrdersDeliveredAndName())
         .forEach((actor)->System.out.println( actor.showFinalInfo() ));
         
         
-
         System.out.println(" ");
         System.out.println("-->> Orders final information <<--");
         System.out.println("-->> ------------------------ <<--");
-        //TODO ordenar (por hora de entrega y si empate por nombre de la persona 
-        //  que recibe el pedido) y mostrar los pedidos
+
         List<Order> orders = company.getOrders();
         orders.stream()
         .sorted(new ComparadorTimeAndDestinationNameOrder())
