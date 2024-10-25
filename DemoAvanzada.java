@@ -93,18 +93,19 @@ public class DemoAvanzada
     /**
      * Orders are created and added to the company
      */
-    private void createOrders() {  
-        Order order1 = new Order("Kevin", new Location(2, 2),
+    private void createOrders() {
+        Location whLocation = company.getlocationWareHouse();
+        Order order1 = new Order("Kevin", whLocation,
                 new Location(10, 10),10, 1.2, "Decathon Cáceres");
-        Order order2 = new Order("Margo", new Location(4, 16),
+        Order order2 = new Order("Margo", whLocation,
                 new Location(19,0),10, 1.2, "Pintores");
-        Order order3 = new Order("Edith", new Location(10, 10),
+        Order order3 = new Order("Edith", whLocation,
                 new Location(2,2),11, 1.2, "Ruta de la Plata");
-        Order order4 = new Order("Stuart", new Location(15, 3),
+        Order order4 = new Order("Stuart", whLocation,
                 new Location(7,1),11, 1.2, "Cruz de los caídos");
-        Order order5 = new Order("Agnes", new Location(11, 6),
+        Order order5 = new Order("Agnes", whLocation,
                 new Location(19,19),12, 1.2, "Ruta de la Plata");
-        Order order6 = new Order("Bob", new Location(13, 17),
+        Order order6 = new Order("Bob", whLocation,
                 new Location(0,0),12, 1.2, "Decathon Cáceres");
         company.addOrder(order1);
         company.addOrder(order2);
@@ -157,7 +158,7 @@ public class DemoAvanzada
         Iterator<Order> iteratorOrders = orders.iterator();
         while(iteratorOrders.hasNext()){
             Order order = iteratorOrders.next();
-            System.out.println(order.getStringShortDetail());
+            System.out.println(order);
         }
 
         System.out.println(" ");        

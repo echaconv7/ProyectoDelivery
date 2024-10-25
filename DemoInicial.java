@@ -138,7 +138,7 @@ public class DemoInicial
         Iterator<Order> iteratorOrders = orders.iterator();
         while(iteratorOrders.hasNext()){
             Order order = iteratorOrders.next();
-            System.out.println(order.getStringShortDetail());
+            System.out.println(order);
         }
 
         System.out.println(" ");        
