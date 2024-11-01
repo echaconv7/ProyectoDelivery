@@ -1,10 +1,10 @@
 import java.util.Comparator;
 
 /**
- * Write a description of class ComparadorOrderDeliveryPersonName here.
+ * Compare Orders by sendingName.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jose Antonio y Elena 
+ * @version 1.0.0
  */
 public class ComparadorOrderDeliveryPersonName implements Comparator <Order>
 {

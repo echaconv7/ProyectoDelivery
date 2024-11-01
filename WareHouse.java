@@ -27,7 +27,7 @@ public class WareHouse
     {
         this();
         this.orders=orders;
-        orders.sort(new ComparadorTimeAndDestinationNameOrder());
+        orders.sort(new ComparadorTimeAndSendingName());
     }
     
    /**
@@ -35,7 +35,7 @@ public class WareHouse
      */
     public void addOrder(Order order){
         orders.add(order);
-        orders.sort(new ComparadorTimeAndDestinationNameOrder());
+        orders.sort(new ComparadorTimeAndSendingName());
     }
     
     /**
@@ -64,7 +64,7 @@ public class WareHouse
         orders.remove(order);
     }
     
-       /**
+    /**
      * Obtiene la localizacion
      * 
      * @return     la localizacion

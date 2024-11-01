@@ -1,10 +1,10 @@
 import java.util.*;
 
 /**
- * Write a description of class ComparadorDistanciaAlmacenDestino here.
+ * Compare delivery persons by distance betweenTarget or by name deliveryPerson.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jose Antonio y Elena
+ * @version 1.0.0
  */
 public class ComparadorDistanciaTargetBetweenDeliveriesPersonsAndName implements Comparator <DeliveryPerson>
 {

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=ComparadorDeliveryPersonOrdersDeliveredAndName
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ ComparadorDeliveryPersonOrdersDeliveredAndName\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Compare\ delivery\ persons\ by\ numbers\ of\ orders\ delivered\ or\ name.\r\n\ \r\n\ @author\ Jose\ Antonio\ y\ Elena\ \r\n\ @version\ 1.0.0\r\n
 comment1.params=dp1\ dp2
 comment1.target=int\ compare(DeliveryPerson,\ DeliveryPerson)
 numComments=2

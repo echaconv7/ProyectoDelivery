@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=ComparadorDistanciaTargetBetweenDeliveriesPersonsAndName
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ ComparadorDistanciaAlmacenDestino\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Compare\ delivery\ persons\ by\ distance\ betweenTarget\ or\ by\ name\ deliveryPerson.\r\n\ \r\n\ @author\ Jose\ Antonio\ y\ Elena\r\n\ @version\ 1.0.0\r\n
 comment1.params=targetLocation
 comment1.target=ComparadorDistanciaTargetBetweenDeliveriesPersonsAndName(Location)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ ComparadorDistanciaAlmacenDestino\r\n

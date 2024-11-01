@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=ComparadorTimeAndSendingName
+comment0.text=\r\n\ Compare\ Orders\ by\ time\ and\ sending\ name.\r\n\ \r\n\ @author\ Jose\ Antonio\ y\ Elena\r\n\ @version\ 2024.10.07\ DP\ classes\r\n
+comment1.params=order1\ order2
+comment1.target=int\ compare(Order,\ Order)
+numComments=2
